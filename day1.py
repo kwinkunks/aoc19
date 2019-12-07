@@ -63,8 +63,8 @@ if __name__ == "__main__":
 
     import sys
     data = get_data()
-    parts = {'1': part1(data), '2': part2(data)}
+    parts = {'1': part1, '2': part2}
     try:
-        print(parts[sys.argv[1]])
+        print(parts[sys.argv[1]](data))
     except IndexError:
         print("Which part?")

@@ -106,8 +106,8 @@ if __name__ == "__main__":
 
     if sys.argv[1] != 'test':
 
-        parts = {'1': part1(), '2': part2()}
+        parts = {'1': part1, '2': part2}
         try:
-            print(parts[sys.argv[1]])
+            print(parts[sys.argv[1]]())
         except IndexError:
             print("Which part?")
