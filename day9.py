@@ -109,25 +109,25 @@ def part1(data: list) -> list:
     >>> execute([104,1125899906842624,99])[0]
     1125899906842624
     """
-    return execute(data, input_=1)
+    return execute(data, input_=1)[0]
 
 
 def part2(data: list) -> int:
 
-    return execute(data, input_=2)
+    return execute(data, input_=2)[0]
 
 
 if __name__ == "__main__":
     import doctest
     import sys
     doctest.testmod(verbose=True)
-    print("++++++++++++++++++\n")
 
-    if sys.argv[1] != 'test':
+    if (arg := sys.argv[1]) != 'test':
 
-        data = get_data()
         parts = {'1': part1, '2': part2}
         try:
-            print(parts[sys.argv[1]](data))
+            func = parts[arg]
         except IndexError:
             print("Which part?")
+
+        print(func(get_data()))
