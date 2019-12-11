@@ -8,13 +8,13 @@ import math
 
 def get_data(fname: str) -> str:
     with open(fname, 'r') as f:
-        data = f.read()
+        data: str = f.read()
     return data
 
 
 def get_coords(data: str) -> list:
     """Parse data and build list of coordinates of asteroids."""
-    coords = []
+    coords: list = []
     for y, line in enumerate(data.split('\n')):
         for x, char in enumerate(line):
             if char == '#':
@@ -33,10 +33,10 @@ def polar(c: complex) -> tuple:
     >>> polar(complex(-1, 1))
     (1.4142135623730951, 5.497787143782138)
     """
-    r = abs(c)
+    r: float = abs(c)
     if r == 0:  # Div by 0.
         return 0, 0
-    theta = math.acos(c.real/r)
+    theta: float = math.acos(c.real/r)
     if c.imag > 0:
         theta = 2 * math.pi - theta
     # Rotate by -90 deg.
@@ -45,7 +45,7 @@ def polar(c: complex) -> tuple:
 
 
 def get_visibles(coords: list) -> dict:
-    results = {}
+    results: dict = {}
     for asteroid in coords:
         this = set()
         for other in coords:
@@ -74,8 +74,8 @@ def part1(data: str) -> int:
     >>> part1(get_data('day10.txt'))  # Actual challenge.
     334
     """
-    coords = get_coords(data)
-    visibles = get_visibles(coords)
+    coords: list = get_coords(data)
+    visibles: dict = get_visibles(coords)
     sorted_visibles = {k: v for k, v in sorted(visibles.items(), key=lambda p: p[1], reverse=True)}
     return list(sorted_visibles.values())[0]
 
@@ -90,8 +90,8 @@ def part2(data: str) -> int:
     >>> part2(day10test.test4)
     802
     """
-    coords = get_coords(data)
-    visibles = get_visibles(coords)
+    coords: list = get_coords(data)
+    visibles: dict = get_visibles(coords)
     sorted_visibles = {k: v for k, v in sorted(visibles.items(), key=lambda p: p[1], reverse=True)}
     base: complex = list(sorted_visibles.keys())[0]
 
@@ -126,7 +126,7 @@ if __name__ == "__main__":
 
     if sys.argv[1] != 'test':
 
-        parts = {'1': part1, '2': part2}
+        parts: dict = {'1': part1, '2': part2}
         try:
             func = parts[sys.argv[1]]
         except IndexError:
